@@ -1,31 +1,28 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. 
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
 jobs:
   build:  
     docker:
-      - image: microsoft/dotnet:latest
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          working_directory: ~/
-          name: restore
+          working_directory: ./
+          name: Restore
           command: dotnet restore
       - run:
-          working_directory: ~/
-          name: build
+          working_directory: ./
+          name: Build
           command: dotnet build
-
-  tests:
-    docker:
-      - image: microsoft/dotnet:latest
-    steps:
-      - checkout
-      - run: dotnet test
-
+      - run:
+          working_directory: ./
+          name: Test
+          command: dotnet test
 workflows:
   sample: 
     jobs:
       - build
-      - tests
+
