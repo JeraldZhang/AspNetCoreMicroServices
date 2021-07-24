@@ -3,7 +3,7 @@ using Xunit;
 
 namespace AspNetCoreMicroServices.Tests.TeamService.Tests
 {
-    public class UnitTest1
+    public class TeamsControllerTests
     {
         [Fact]
         public void Test1()
