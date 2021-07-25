@@ -1,0 +1,40 @@
+version: 2.1
+
+jobs:
+  build:  
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - run:
+          working_directory: ./src
+          name: Restore
+          command: dotnet restore
+      - run:
+          working_directory: ./src
+          name: Build
+          command: dotnet build
+      - run:
+          working_directory: ./src
+          name: Test
+          command: dotnet test
+  deploy:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - run:
+          working_directory: ./src/Services/TeamService
+          name: Restore
+          command: dotnet publish -o publish
+workflows:
+  sample: 
+    jobs:
+      - build
+      - deploy
