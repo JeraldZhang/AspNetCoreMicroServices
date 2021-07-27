@@ -23,6 +23,7 @@ namespace TeamService.Controllers
             return Ok(await repository.GetTeams());
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateTeam(Team team)
         {
             await repository.AddTeam(team);

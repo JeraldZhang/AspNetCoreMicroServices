@@ -18,9 +18,13 @@ namespace AspNetCoreMicroServices.Services.TeamService
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Run(async (context) =>
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                await context.Response.WriteAsync("Hello world");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

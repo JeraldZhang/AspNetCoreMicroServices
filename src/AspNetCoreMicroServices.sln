@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamService", "Services\Tea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamService.Tests", "Tests\TeamService.Tests\TeamService.Tests.csproj", "{770240C5-F224-4391-8327-044D582B0CC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamService.Tests.Intergration", "Tests\TeamService.Tests.Intergration\TeamService.Tests.Intergration\TeamService.Tests.Intergration.csproj", "{CC1EF34B-FA9A-463D-9F6E-93F4D8027AA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{770240C5-F224-4391-8327-044D582B0CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{770240C5-F224-4391-8327-044D582B0CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{770240C5-F224-4391-8327-044D582B0CC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC1EF34B-FA9A-463D-9F6E-93F4D8027AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC1EF34B-FA9A-463D-9F6E-93F4D8027AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC1EF34B-FA9A-463D-9F6E-93F4D8027AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC1EF34B-FA9A-463D-9F6E-93F4D8027AA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A2902170-89B2-4C60-B89E-95B264313622} = {D18F7624-8E98-4B90-98D3-A3705FD00C38}
 		{770240C5-F224-4391-8327-044D582B0CC9} = {8015AC88-07D2-4F76-AD64-D2B91E02A027}
+		{CC1EF34B-FA9A-463D-9F6E-93F4D8027AA5} = {8015AC88-07D2-4F76-AD64-D2B91E02A027}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D77FC64D-A2BD-4C01-885B-2159343AA9DC}
