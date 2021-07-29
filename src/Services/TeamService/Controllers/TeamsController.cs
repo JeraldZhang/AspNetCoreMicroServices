@@ -24,7 +24,7 @@ namespace TeamService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTeam(Team team)
+        public async Task<IActionResult> CreateTeam([FromBody] Team team)
         {
             await repository.AddTeam(team);
             return Ok();
