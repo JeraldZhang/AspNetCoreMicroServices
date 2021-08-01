@@ -8,9 +8,11 @@ using TeamService.Persisitence;
 
 namespace TeamService.Controllers
 {
-    public class TeamsController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class TeamsController : ControllerBase
     {
-        ITeamRepository repository;
+        protected readonly ITeamRepository repository;
 
         public TeamsController(ITeamRepository teamRepository)
         {
@@ -26,6 +28,7 @@ namespace TeamService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTeam([FromBody] Team team)
         {
+            
             await repository.AddTeam(team);
             return Ok();
         }

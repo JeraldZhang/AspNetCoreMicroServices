@@ -37,15 +37,15 @@ namespace TeamService.Tests.Intergration
             var stringContent = new StringContent(
                 JsonConvert.SerializeObject(teamZombie), Encoding.UTF8, "application/json");
 
-            var postResponse = await testClient.PostAsync("/Teams/CreateTeam", stringContent);
+            var postResponse = await testClient.PostAsync("/teams", stringContent);
             postResponse.EnsureSuccessStatusCode();
-            var getResponse = await testClient.GetAsync("/Teams/GetAllTeams");
+            var getResponse = await testClient.GetAsync("/teams");
             getResponse.EnsureSuccessStatusCode();
 
             var raw = await getResponse.Content.ReadAsStringAsync();
             var teams = JsonConvert.DeserializeObject<List<Team>>(raw);
 
-            Assert.Equal(1, teams.Count);
+            Assert.Single(teams);
             Assert.Equal("Zombie", teams[0].Name);
             Assert.Equal(teamZombie.ID, teams[0].ID);
         }
