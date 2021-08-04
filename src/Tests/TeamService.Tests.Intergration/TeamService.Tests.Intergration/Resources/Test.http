@@ -1,0 +1,33 @@
+@port = 5000
+@host = localhost
+###
+
+GET http://{{host}}:{{port}}/teams HTTP/1.1
+
+
+###
+
+POST http://{{host}}:{{port}}/teams/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" = "061fdd0f-1211-431c-83f8-984ee56d4a45",
+    "name" = "Zombie"
+}
+
+###
+
+GET http://{{host}}:{{port}}/locations/latest HTTP/1.1
+
+###
+
+GET http://{{host}}:{{port}}/latest HTTP/1.1
+
+###
+
+POST http://{{host}}:{{port}}/0 HTTP/1.1
+Content-Type: application/json
+
+{
+    
+}

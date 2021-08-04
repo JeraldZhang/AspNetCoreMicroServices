@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using StatlerWaldorfCorp.TeamService.Persistence;
 using TeamService.Persisitence;
+using TeamService.Persisitence.InMemoryImp;
+using TeamService.Persistence;
 
 namespace AspNetCoreMicroServices.Services.TeamService
 {
@@ -24,8 +23,7 @@ namespace AspNetCoreMicroServices.Services.TeamService
             services.AddControllers();
             services.AddDbContext<TeamDbContext>(options =>
                      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<ITeamRepository, MemoryTeamRepository>();
-            services.AddScoped<ILocationRecordRepository, MemoryLocationRecordRepository>();
+            services.AddScoped<ITeamRepository, InMemoryTeamRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

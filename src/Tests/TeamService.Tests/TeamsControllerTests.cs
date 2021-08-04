@@ -15,7 +15,7 @@ namespace AspNetCoreMicroServices.Tests.TeamService.Tests
         [Fact]
         public async Task QueryTeamListReturensCorrectTeams()
         {
-            var controller = new TeamsController(new MemoryTeamRepository());
+            var controller = new TeamsController(new InMemoryTeamRepository());
 
             var teams = new List<Team>((IEnumerable<Team>)(await controller.GetAllTeams() as ObjectResult).Value);
 
@@ -25,7 +25,7 @@ namespace AspNetCoreMicroServices.Tests.TeamService.Tests
         [Fact]
         public async void CreateTeamAddsTeamToList()
         {
-            var controller = new TeamsController(new MemoryTeamRepository());
+            var controller = new TeamsController(new InMemoryTeamRepository());
 
             var teams = (IEnumerable<Team>)(await controller.GetAllTeams() as ObjectResult).Value;
             var original = new List<Team>(teams);

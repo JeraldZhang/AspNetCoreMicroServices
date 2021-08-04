@@ -4,21 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeamService.Models;
 
-namespace TeamService.Persisitence
+namespace TeamService.Persisitence.InMemoryImp
 {
-    public class MemoryTeamRepository : ITeamRepository
+    public class InMemoryTeamRepository : ITeamRepository
     {
         protected static ICollection<Team> teams;
 
-        public MemoryTeamRepository()
+        public InMemoryTeamRepository()
         {
             if (teams == null)
                 teams = new List<Team>();
         }
 
-        public MemoryTeamRepository(ICollection<Team> teams)
+        public InMemoryTeamRepository(ICollection<Team> teams)
         {
-            MemoryTeamRepository.teams = teams;
+            InMemoryTeamRepository.teams = teams;
         }
 
         public Task AddTeam(Team team)
