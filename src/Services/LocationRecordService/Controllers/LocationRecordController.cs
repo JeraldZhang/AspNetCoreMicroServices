@@ -5,8 +5,9 @@ using LocationService.Persisitence;
 
 namespace LocationService.Controllers
 {
+    [ApiController]
     [Route("locations/{memeberId}")]
-    public class LocationRecordController : Controller
+    public class LocationRecordController : ControllerBase
     {
         private readonly ILocationRecordRepository _locationRepository;
 

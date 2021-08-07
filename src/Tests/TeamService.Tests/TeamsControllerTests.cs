@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TeamService.Controllers;
 using TeamService.Models;
-using TeamService.Persisitence;
+using TeamService.Persisitence.InMemoryImp;
 using Xunit;
 
 namespace AspNetCoreMicroServices.Tests.TeamService.Tests
