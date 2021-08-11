@@ -5,39 +5,41 @@ using RabbitMQ.Client;
 using LocationReporter.Models;
 using System;
 using LocationReporter.Services;
+using LocationReporter.Events;
 
-namespace LocationReporter.Events
+namespace LocationReporter.Services
 {
 
     public class AMQPEventEmitter : IEventEmitter
     {
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
 
-        private AMQPOptions rabbitOptions;
+        private readonly AMQPOptions _rabbitOptions;
 
-        private ConnectionFactory connectionFactory;
+        private readonly ConnectionFactory _connectionFactory;
 
         public AMQPEventEmitter(ILogger<AMQPEventEmitter> logger,
             IOptions<AMQPOptions> amqpOptions)
         {
-            this.logger = logger;
-            this.rabbitOptions = amqpOptions.Value;
+            this._logger = logger;
+            this._rabbitOptions = amqpOptions.Value;
 
-            connectionFactory = new ConnectionFactory();
+            _connectionFactory = new ConnectionFactory
+            {
+                UserName = _rabbitOptions.Username,
+                Password = _rabbitOptions.Password,
+                VirtualHost = _rabbitOptions.VirtualHost,
+                HostName = _rabbitOptions.HostName,
+                Uri = new Uri(_rabbitOptions.Uri)
+            };
 
-            connectionFactory.UserName = rabbitOptions.Username;
-            connectionFactory.Password = rabbitOptions.Password;
-            connectionFactory.VirtualHost = rabbitOptions.VirtualHost;
-            connectionFactory.HostName = rabbitOptions.HostName;
-            connectionFactory.Uri = new Uri(rabbitOptions.Uri);
-
-            logger.LogInformation("AMQP Event Emitter configured with URI {0}", rabbitOptions.Uri);
+            logger.LogInformation("AMQP Event Emitter configured with URI {0}", _rabbitOptions.Uri);
         }
         public const string QUEUE_LOCATIONRECORDED = "memberlocationrecorded";
 
         public void EmitLocationRecordedEvent(MemberLocationRecordedEvent locationRecordedEvent)
         {
-            using var conn = connectionFactory.CreateConnection();
+            using var conn = _connectionFactory.CreateConnection();
             using var channel = conn.CreateModel();
             channel.QueueDeclare(
                 queue: QUEUE_LOCATIONRECORDED,

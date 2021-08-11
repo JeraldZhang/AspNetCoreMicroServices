@@ -10,10 +10,9 @@ namespace LocationReporter.Controllers
     [Route("/api/members/{memberId}/locationreports")]
     public class LocationReportsController : Controller
     {
-        private ICommandEventConverter _converter;
-        private IEventEmitter _eventEmitter;
-        private ITeamServiceClient _teamServiceClient;
-        
+        private readonly ICommandEventConverter _converter;
+        private readonly IEventEmitter _eventEmitter;
+        private readonly ITeamServiceClient _teamServiceClient;
 
         public LocationReportsController(ICommandEventConverter converter, 
             IEventEmitter eventEmitter, 
@@ -26,7 +25,7 @@ namespace LocationReporter.Controllers
         [HttpPost]
         public ActionResult PostLocationReport(Guid memberId, [FromBody]LocationReport locationReport)
         {
-            MemberLocationRecordedEvent locationRecordedEvent = _converter.CommandToEvent(locationReport);
+            var locationRecordedEvent = _converter.CommandToEvent(locationReport);
             locationRecordedEvent.TeamID = _teamServiceClient.GetTeamForMember(locationReport.MemberID);
             _eventEmitter.EmitLocationRecordedEvent(locationRecordedEvent);
 

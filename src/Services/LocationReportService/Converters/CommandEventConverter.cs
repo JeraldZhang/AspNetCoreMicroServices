@@ -8,7 +8,7 @@ namespace LocationReporter.Converters
     {
         public MemberLocationRecordedEvent CommandToEvent(LocationReport locationReport) 
         {
-            MemberLocationRecordedEvent locationRecordedEvent = new MemberLocationRecordedEvent {
+            var locationRecordedEvent = new MemberLocationRecordedEvent {
                 Latitude = locationReport.Latitude,
                 Longitude = locationReport.Longitude,
                 Origin = locationReport.Origin,
