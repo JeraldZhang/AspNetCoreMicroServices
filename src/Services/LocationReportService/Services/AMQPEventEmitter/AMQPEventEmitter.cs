@@ -48,7 +48,7 @@ namespace LocationReporter.Services
                 autoDelete: false,
                 arguments: null
             );
-            string jsonPayload = locationRecordedEvent.toJson();
+            var jsonPayload = locationRecordedEvent.ToJson();
             var body = Encoding.UTF8.GetBytes(jsonPayload);
             channel.BasicPublish(
                 exchange: "",

@@ -9,5 +9,11 @@ namespace TeamService.Persisitence
     {
         Task<IEnumerable<Team>> GetTeams();
         Task AddTeam(Team team);
+
+        IEnumerable<Team> List();
+        Team Get(Guid id);
+        Team Add(Team team);
+        Team Update(Team team);
+        Team Delete(Guid id);
     }
 }

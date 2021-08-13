@@ -13,7 +13,7 @@ namespace LocationReporter.Events
         public Guid ReportID { get; set; }
         public Guid TeamID { get; set; }
 
-        public string toJson() {
+        public string ToJson() {
             return JsonConvert.SerializeObject(this);
         }
     }

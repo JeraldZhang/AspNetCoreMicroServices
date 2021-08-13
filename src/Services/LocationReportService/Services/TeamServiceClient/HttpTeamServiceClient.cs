@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace LocationReporter.Services
 {
@@ -17,11 +18,11 @@ namespace LocationReporter.Services
             IOptions<TeamServiceOptions> serviceOptions,
             ILogger<HttpTeamServiceClient> logger)
         {
-            this._logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
             var url = serviceOptions.Value.Url;
 
-            logger.LogInformation("Team Service HTTP client using URL {0}", url);
+            _logger.LogInformation("Team Service HTTP client using URL {0}", url);
 
             _httpClient = new HttpClient
             {
@@ -29,24 +30,21 @@ namespace LocationReporter.Services
             };
         }
 
-        public Guid GetTeamForMember(Guid memberId)
+        public async Task<Guid> GetTeamForMember(Guid memberId)
         {
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = _httpClient.GetAsync($"/members/{memberId}/team").Result;
+            var response = await _httpClient.GetAsync($"/members/{memberId}/team");
 
-            TeamIDResponse teamIdResponse;
             if (response.IsSuccessStatusCode)
             {
-                string json = response.Content.ReadAsStringAsync().Result;
-                teamIdResponse = JsonConvert.DeserializeObject<TeamIDResponse>(json);
+                var json = await response.Content.ReadAsStringAsync();
+                var teamIdResponse = JsonConvert.DeserializeObject<TeamIDResponse>(json);
                 return teamIdResponse.TeamID;
             }
-            else
-            {
-                return Guid.Empty;
-            }
+
+            return Guid.Empty;
         }
     }
 

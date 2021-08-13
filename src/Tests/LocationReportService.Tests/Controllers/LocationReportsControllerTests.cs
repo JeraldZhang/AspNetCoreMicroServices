@@ -6,6 +6,7 @@ using LocationReporter.Converters;
 using LocationReporter.Services;
 using Moq;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace LocationReporter.Controllers
 {
@@ -38,7 +39,7 @@ namespace LocationReporter.Controllers
             mockTSClient
                 .InSequence(sequence)
                 .Setup(mtsct => mtsct.GetTeamForMember(It.Is<Guid>(g => g == memeberId)))
-                .Returns(memeberId);
+                .ReturnsAsync(memeberId);
 
             // Act
             var controller = new LocationReportsController(

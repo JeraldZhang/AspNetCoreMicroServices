@@ -1,0 +1,16 @@
+@hostname = localhost
+@port = 44330
+@host = {{hostname}}:{{port}}
+
+###
+
+POST http://{{host}}/api/members/{memberId}/locationreports HTTP/1.1
+Content-Type: application/json
+
+{
+    "reportID":"6ff5f2d0-d542-4805-aea9-45e1ba697248",
+    "origin":"origin",
+    "latitude":116.4,
+    "longitude":39.9,
+    "memberID":"dd359820-db78-40e7-a218-3a90a1fcaf12"
+}
