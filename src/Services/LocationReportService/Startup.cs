@@ -21,7 +21,7 @@ namespace LocationReporter
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddControllers();
             services.AddOptions();
             services.AddAMQPEventEmitter(Configuration);
             services.AddTeamServiceClien(Configuration);
@@ -30,10 +30,11 @@ namespace LocationReporter
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Asked for instances of singletons during Startup
-            // to force initialization early.
-
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
